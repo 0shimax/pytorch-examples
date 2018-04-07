@@ -35,7 +35,7 @@ class WNGrad(Optimizer):
 
                 state['step'] += 1
                 state['bj'] += \
-                    (group['lr']**2)/(state['bj'])*(grad.norm(2))
+                    (group['lr']**2)/(state['bj'])*grad.pow(2).sum()
 
                 p.data.sub_(group['lr'] / state['bj'] * grad)
         return loss
